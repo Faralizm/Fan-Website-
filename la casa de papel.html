@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Casa de Papel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0d0d0d;
+      color: #fff;
+    }
+    .nav-bar {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      text-align: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(5px);
+    }
+    .nav-bar a, .social-links a {
+      color: #e63946;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1em;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .nav-bar a:hover, .social-links a:hover {
+      color: #ffffff;
+      transform: scale(1.1);
+    }
+     .social-links a {
+      font-size: 1.5em;
+    }
+    .hero {
+      height: 100vh;
+      background: linear-gradient(135deg, #6c0101 0%, #e63946 50%, #491c1c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: 5em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      color: #e63946;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+      margin-bottom: 20px;
+      transition: color 0.5s ease, transform 0.5s ease; 
+    }
+    .hero h1:hover {
+      color: #ffffff; 
+      transform: scale(1.05);
+    }
+    .hero p {
+      font-size: 1.5em;
+      color: #fff;
+      margin-bottom: 30px;
+      font-weight: 300;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    .hero .cta-button {
+      display: inline-block;
+      padding: 15px 40px;
+      background: #e63946;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2em;
+      font-weight: 500;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .hero .cta-button:hover {
+      background: #fff;
+      color: #e63946;
+      transform: scale(1.05);
+    }
+    .characters,.about,.faqs {
+      padding: 80px 20px;
+      background: #1a1a1a;
+      text-align: center;
+    }
+    .characters h2, .about h2, .faqs h2, .gallery h2, .video-section h2 {
+      font-size: 2.8em;
+      color: #e63946;
+      margin-bottom: 40px;
+    }
+    .character-grid {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .character-card {
+      background: #2c2c2c;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 250px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease; 
+    }
+    .character-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(230, 57, 70, 0.5);
+      background: #3a3a3a; 
+    }
+    .character-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: opacity 0.3s ease; 
+    }
+    .character-card img:hover {
+      opacity: 0.9; 
+    }
+    .character-card p {
+      padding: 15px;
+      font-size: 1.2em;
+      font-weight: 500;
+      color: #e63946;
+    }
+    .tour-form, .contact {
+      padding: 80px 20px;
+      background: #e63946;
+      text-align: center;
+    }
+    .tour-form h2, .contact h2 {
+      font-size: 2.8em;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+    .tour-form form, .contact form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .tour-form input,.tour-form select, .contact input, .contact textarea{
+      display: block;
+      width: 100%;
+      margin: 15px 0;
+      padding: 15px;
+      background: #2c2c2c;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      font-family: 'Poppins', sans-serif;
+    }
+    .tour-form button, .contact button {
+      padding: 15px 40px;
+      background: #fff;
+      color: #e63946;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1em;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .tour-form button:hover, .contact button:hover {
+      background: #2c2c2c;
+      color: #fff;
+    }
+    .contact textarea {
+      height: 150px;
+    }
+    .gallery, .video-section {
+      padding: 80px 20px;
+      text-align: center;
+      background: #0d0d0d;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .gallery-grid img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #e63946;
+      transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; 
+    }
+    .g0allery-grid img:hover {
+      transform: scale(1.05);
+      border-color: #ffffff; 
+      box-shadow: 0 5px 15px rgba(230, 57, 70, 0.5); 
+    }
+    .about p {
+      font-size: 1.2em;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq {
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: left;
+    }
+    .faq h3 {
+      font-size: 1.4em;
+      color: #e63946;
+      margin-bottom: 10px;
+    }
+    .faq p {
+      font-size: 1.1em;
+      color: #ccc;
+    }
+    .video-section iframe {
+      max-width: 800px;
+      width: 100%;
+      height: 450px;
+      border-radius: 10px;
+    }
+    .footer {
+      padding: 40px 20px;
+      background: #000;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 1em;
+      color: #ccc;
+    }
+    .social-links {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="nav-bar">
+    <a href="">HOME</a>
+    <a href="">CHARACTERS</a>
+    <a href="">GALLERY</a>
+    <a href="">BOOK A TOUR</a>
+    <a href="">CONTACT</a>
+  </div>
+
+  <div class="hero" id="home">
+    <div class="hero-content">
+      <h1>LA CASA DE PAPEL</h1>
+      <p>The Ultimate Heist Begins Here</p>
+      <a href="#video-section" class="cta-button">Watch Trailer</a>
+    </div>
+</div>
+
+  <div class="characters" id="characters">
+    <h2>Look the Popular actors</h2>
+    <div class="character-grid">
+      <div class="character-card">
+        <img src="img/220x300.jpg" alt="The Professor">
+        <p>Professor</p>
+      </div>
+      <div class="character-card">
+        <img src="img/images220x300.jpg" alt="Tokio">
+        <p>Tokio</p>
+      </div>
+      <div class="character-card">
+        <img src="img/berlinmoneyheistnothingtolosedtoc6eikv5cbf05l220x300.jpg" alt="Berlin">
+        <p>Berlin</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tour-form" id="tour">
+    <h2>Book a Tour</h2>
+    <form onsubmit="return false">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <input type="text" placeholder="Phone Number" required>
+      <select name="tour-type" required>
+        <option value="Standard">Standard</option>
+        <option value="VİP">Premium</option>
+      </select>
+      <input type="date" required>
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+
+  <div class="gallery" id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      <img src="img/350x200.png" alt="Scene 1">
+      <img src="img/dali-mask.png">
+      <img src="img/professormoneyheist4kcentralbankscenenz0rizryt5399v09350x200.jpg">
+      <img src="images350x200.jpg">
+      <img src="img/subbuzz124615863995701350x200.png">
+      <img src="img/images-1350x200.jpg">
+    </div>
+  </div>
+
+  <div class="about">
+    <h2>About La Casa de Papel (Money Heist)</h2>
+    <p>La Casa de Papel (Money Heist) is a Spanish television series created by Álex Pina. The show follows a group of robbers, led by the Professor, as they plan and execute heists on the Royal Mint of Spain and the Bank of Spain. Known for its thrilling plot, complex characters, and iconic red jumpsuits and Dalí masks, the series has gained a massive global following.</p>
+  </div>
+
+  <div class="video-section" id="video-section">
+    <h2>First Trailer</h2>
+    <iframe src="https://www.youtube.com/embed/VSgm-gcP_GU" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <div class="faqs">
+    <h2>Popular Questions</h2>
+    <div class="faq">
+      <h3>1) What is La Casa de Papel about?</h3>
+      <p>- La Casa de Papel is a Spanish series about a group of robbers executing heists on the Royal Mint and Bank of Spain, led by a mastermind called The Professor.</p>
+    </div>
+    <div class="faq">
+      <h3>2) Where can I watch the series?</h3>
+      <p>- You can watch La Casa de Papel on streaming platforms like Netflix.</p>
+    </div>
+    <div class="faq">
+      <h3><b>3) Will there be a new season of La Casa de Papel?</b></h3>
+      <p>- However, a spin-off series titled "Berlin" was released in 2023, offering new stories for fans. Currently, there are no plans for a new season of the main series, but future spin-off projects might be possible.</p>
+    </div>
+  </div>
+
+  <div class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form onsubmit="return false">
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Your Email">
+      <textarea placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <div class="footer">
+    <p>La Casa de Papel Fan Site by FEDYA.</p>
+    <div class="social-links">
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+</body>
+</html>
